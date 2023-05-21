@@ -1,0 +1,20 @@
+config:
+  backup: true
+  create: true
+  dotpath: dotfiles
+dotfiles:
+  f_inputrc:
+    src: inputrc
+    dst: ~/.inputrc
+  f_gitconfig:
+    src: gitconfig
+    dst: ~/.gitconfig
+profiles:
+  home:
+    dotfiles:
+    - f_inputrc
+    - f_gitconfig
+  init:
+     dotfiles:
+     - f_inputrc
+

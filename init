@@ -1,0 +1,16 @@
+#!/bin/bash
+set -ex
+
+cd "$HOME"
+
+# if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+# 	export PATH="$HOME/bin:$PATH"
+# fi
+
+wget https://github.com/bes-internal/dotfiles/archive/refs/heads/main.zip -O dotfiles-main.zip
+unzip -q dotfiles-main.zip && rm dotfiles-main.zip
+
+exec "$SHELL" -l
+
+# curl -fsSL https://xn--txe.net/init |bash -
+
