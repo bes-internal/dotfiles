@@ -1,0 +1,5 @@
+# include what you want
+
+# add this to the .bashrc or .zshrc (done automatically by dfm):
+# . $HOME/.shellrc.load
+
