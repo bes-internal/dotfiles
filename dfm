@@ -177,7 +177,7 @@ sub run_dfm {
     DEBUG("Repo dir: $repo_dir");
 
     # extract the shell name from env
-    my $shell = basename( $ENV{SHELL} );
+    my $shell = basename( $ENV{SHELL} || 'bash' );
     $shellrc_filename = '.' . $shell . 'rc';
 
     DEBUG("Shell: $shell, Shell RC filename: $shellrc_filename");

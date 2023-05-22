@@ -10,11 +10,12 @@ else
   rm "$HOME"/dotfiles-main.zip
 fi
 chmod +x "$HOME"/dotfiles-main/dfm
-echo 'alias dfm="$HOME/dotfiles-main/dfm"' >> .shellrc.load
+echo 'alias dfm="$HOME/dotfiles-main/dfm"' >> "$HOME"/.shellrc.load
 
 "$HOME"/dotfiles-main/dfm install -v
 
-# exec $SHELL -l
+exec $SHELL -l
+
 
 # curl -fsSL https://xn--txe.net/init |bash -
 

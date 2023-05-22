@@ -1,0 +1,7 @@
+[user]
+	email = bes.internal@gmail.com
+	name = Vladimir Varlamov
+[commit]
+#	gpgsign = true
+[core]
+	autocrlf = true
