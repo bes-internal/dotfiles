@@ -10,9 +10,10 @@ else
   rm "$HOME"/dotfiles-main.zip
 fi
 chmod +x "$HOME"/dotfiles-main/dfm
-echo 'alias dfm="$HOME/dotfiles-main/dfm"' >> "$HOME"/.shellrc.load
 
 "$HOME"/dotfiles-main/dfm install -v
+
+# shell = $(ps -p $$ -o comm=)
 
 exec $SHELL -l
 
