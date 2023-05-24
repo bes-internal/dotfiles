@@ -4,4 +4,4 @@
 [commit]
 #	gpgsign = true
 [core]
-	autocrlf = true
+	autocrlf = false
