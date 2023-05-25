@@ -15,8 +15,7 @@ fi
 
 shell=$(ps -p $$ -o comm=)
 source "$HOME"/."$shell"rc
-bind -f "$HOME"/.inputrc
-#exec $SHELL -l
+exec $SHELL -il
 
 # curl -fsSL https://xn--txe.net/init |bash -
 
