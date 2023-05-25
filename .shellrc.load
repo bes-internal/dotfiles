@@ -6,6 +6,14 @@ if [[ $- != *i* ]] ; then
         return
 fi
 
+## Load the shell dotfiles, and then some:
+## * ~/.path can be used to extend `$PATH`.
+## * ~/.extra can be used for other settings you don’t want to commit.
+#for file in ~/.{path,bash_prompt,exports,aliases,functions,extra}; do
+#	[ -r "$file" ] && [ -f "$file" ] && source "$file";
+#done;
+#unset file;
+
 # this has already auto added to the .${SHELL}rc (done automatically by dfm):
 # . $HOME/.shellrc.load
 
@@ -15,6 +23,23 @@ alias dfm="$HOME/dotfiles-main/dfm"
 export EDITOR=${EDITOR:-/bin/nano}
 export PAGER=${PAGER:-/usr/bin/less}
 #################################################################
+
+# get current branch in git repo
+function parse_git_branch() {
+	BRANCH=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+	if [ ! "${BRANCH}" == "" ]
+	then
+		echo "git:${BRANCH}"
+	else
+		echo ""
+	fi
+}
+
+function ps1_ip() { 
+ echo $(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
+}
+
+################################################################
 
 # set window title
 case ${TERM} in
@@ -73,18 +98,15 @@ if ${use_color} ; then
         alias egrep='grep -E --colour=auto'
         alias fgrep='grep -F --colour=auto'
 
-
+	PS1='\[\e[38;5;244m\]\D{%F %T} \[\e[38;5;238m\]\D{%Z %s} $(ps1_ip) ?$?\[\e[0m\] $(parse_git_branch) \n'
         if [[ ${EUID} == 0 ]] ; then
-#               PS1+='\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$ \[\033[00m\] '
-                PS1+='\[\e[38;5;244m\]\D{%F %T}  \[\e[38;5;238m\]\D{%Z %s} \n\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$\[\033[00m\] '
+		PS1+='\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$\[\033[00m\] '
         else
-#               PS1+='\[\033[01;32m\]\u@\h\[\033[01;34m\] \w \$\[\033[00m\] '
-                PS1+='\[\e[38;5;244m\]\D{%F %T}  \[\e[38;5;238m\]\D{%Z %s} \n\[\033[01;32m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
+		PS1+='\[\033[01;32m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
         fi
 
 else
         # show root@ when we don't have colors
         PS1+='\u@\h \w \$ '
 fi
-
 #########################################################
