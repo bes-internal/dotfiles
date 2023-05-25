@@ -35,10 +35,6 @@ function parse_git_branch() {
 	fi
 }
 
-function ps1_ip() { 
- echo $(ip route get 1.1.1.1 | awk -F"src " 'NR==1{split($2,a," ");print a[1]}')
-}
-
 ################################################################
 
 # set window title
@@ -98,7 +94,7 @@ if ${use_color} ; then
         alias egrep='grep -E --colour=auto'
         alias fgrep='grep -F --colour=auto'
 
-	PS1='\[\e[38;5;244m\]\D{%F %T} \[\e[38;5;238m\]\D{%Z %s} $(ps1_ip) ?$?\[\e[0m\] $(parse_git_branch) \n'
+	PS1='\[\e[38;5;244m\]\D{%F %T} \[\e[38;5;238m\]\D{%Z %s} ?$?\[\e[0m\] $(parse_git_branch) \n'
         if [[ ${EUID} == 0 ]] ; then
 		PS1+='\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$\[\033[00m\] '
         else
