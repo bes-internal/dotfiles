@@ -9,13 +9,12 @@ else
   unzip -q "$HOME"/dotfiles-main.zip -d "$HOME"
   rm "$HOME"/dotfiles-main.zip
 fi
-#chmod +x "$HOME"/dotfiles-main/dfm
 
 "$HOME"/dotfiles-main/dfm install -v
 
-shell=$(ps -p $$ -o comm=)
-source "$HOME"/."$shell"rc
-exec $SHELL -i
+#shell=$(ps -p $$ -o comm=)
+#source "$HOME"/."$shell"rc
+#exec $SHELL -i
 
 # curl -fsSL https://xn--txe.net/init |bash -
 
