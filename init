@@ -13,11 +13,9 @@ fi
 
 "$HOME"/dotfiles-main/dfm install -v
 
-# shell = $(ps -p $$ -o comm=)
-
-#source "$HOME"/.bashrc
+shell=$(ps -p $$ -o comm=)
+source "$HOME"/."$shell"rc
 exec $SHELL -l
-
 
 # curl -fsSL https://xn--txe.net/init |bash -
 
