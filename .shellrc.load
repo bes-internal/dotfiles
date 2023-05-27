@@ -86,12 +86,30 @@ if ${use_color} ; then
         alias egrep='grep -E --colour=auto'
         alias fgrep='grep -F --colour=auto'
 
-	PS1='\[\e[38;5;244m\]\D{%F %T} \[\e[38;5;238m\]\D{%Z %s} ?$?\[\e[0m\] $(parse_git_branch) \n'
-        if [[ ${EUID} == 0 ]] ; then
-		PS1+='\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$\[\033[00m\] '
-        else
-		PS1+='\[\033[01;32m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
-        fi
+# https://stackoverflow.com/a/66772796/4022466
+# PS0 extracts a substring of length 0 from PS1; as a side-effect it causes
+# the current time as epoch seconds to PS0time (no visible output in this case)
+PS0='\[${PS1:$((PS0time=\D{%s}, PS1calc=1, 0)):0}\]'
+# PS1 uses the same trick to calculate the time elapsed since PS0 was output.
+# It also expands the previous command's exit status ($?), the current time
+# and directory ($PWD rather than \w, which shortens your home directory path
+# prefix to "~") on the next line, and finally the actual prompt: 'user@host> '
+#PS1='\nSeconds: $((PS1calc ? \D{%s}-$PS0time : 0)) Status: $?\n\D{%T} ${PWD:PS1calc=0}\n\u@\h> '
+
+PS1+='\[\e[38;5;244m\]' # gray
+PS1+='\D{%F %T} '       # date time 
+PS1+='\[\e[38;5;238m\]' # gray but lighter
+PS1+='\D{%Z %s} '       # tz epoch  
+PS1+='?$? '		# exit status
+PS1+='elapsed: $((PS1calc ? \D{%s}-PS0time : 0))s \[${PWD:PS1calc=0:0}\]'
+PS1+='\[\e[0m\]  '      # end
+PS1+='$(parse_git_branch)'
+PS1+='\n'
+if [[ ${EUID} == 0 ]] ; then
+ PS1+='\[\033[38;5;201m\]\h\[\033[01;34m\]:\w \$\[\033[00m\] '
+else
+ PS1+='\[\033[01;32m\]\u@\h\[\033[01;34m\]:\w \$\[\033[00m\] '
+fi
 
 else
         # show root@ when we don't have colors
