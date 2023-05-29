@@ -2,3 +2,5 @@ dfm skip
 init skip
 README.md skip
 
+.config recurse
+.config/htop recurse
