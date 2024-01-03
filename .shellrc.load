@@ -88,6 +88,7 @@ if ${use_color} ; then
         alias grep='grep --colour=auto'
         alias egrep='grep -E --colour=auto'
         alias fgrep='grep -F --colour=auto'
+        alias ip='ip -c'
 
 # https://stackoverflow.com/a/66772796/4022466
 # PS0 extracts a substring of length 0 from PS1; as a side-effect it causes
