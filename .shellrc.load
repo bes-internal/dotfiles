@@ -14,6 +14,8 @@ alias dfm="$HOME/dotfiles-main/dfm"
 alias gl="git log --decorate --pretty=format:\"%C(#9f97f3)%ai%Creset | %h | %s %C(auto)%d%Creset\" --graph --all"
 alias glh="PAGER='head -n 30' git log --decorate --pretty=format:\"%ai%Creset | %h | %s %C(auto)%d%Creset\" --graph --all"
 
+alias historyclean="cat /dev/null > ~/.bash_history && history -c && history -w && exit"
+
 #################################################################
 export EDITOR=${EDITOR:-/bin/nano}
 export PAGER=${PAGER:-/usr/bin/less}
